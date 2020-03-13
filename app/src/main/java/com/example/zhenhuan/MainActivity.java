@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button button_nextyear;
@@ -25,7 +28,29 @@ public class MainActivity extends AppCompatActivity {
                 text.append("next\n");
             }
         });
+    }
 
+
+    public void initdata(){
+
+        TextView attribute_name_1 = (TextView) findViewById(R.id.attribute_name_1);
+        TextView attribute_name_2 = (TextView) findViewById(R.id.attribute_name_2);
+        TextView attribute_name_3 = (TextView) findViewById(R.id.attribute_name_3);
+        TextView attribute_value_1 = (TextView) findViewById(R.id.attribute_value_1);
+        TextView attribute_value_2 = (TextView) findViewById(R.id.attribute_value_2);
+        TextView attribute_value_3 = (TextView) findViewById(R.id.attribute_value_3);
+
+        List attribute_name_list = new LinkedList();
+        attribute_name_list.add(attribute_name_1);
+        attribute_name_list.add(attribute_name_2);
+        attribute_name_list.add(attribute_name_3);
+
+        List attribute_value_list = new LinkedList();
+        attribute_value_list.add(attribute_value_1);
+        attribute_value_list.add(attribute_value_2);
+        attribute_value_list.add(attribute_value_3);
 
     }
+
+
 }
