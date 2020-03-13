@@ -25,7 +25,7 @@ public class DBQuery extends SQLiteOpenHelper {
 
     }
 
-    public void attribute()
+    public String attribute()
     {
         Cursor cursor = db.query("attribute", new String[]{"name","value"}, null, null, null, null, null);
         String data = "";
@@ -34,9 +34,9 @@ public class DBQuery extends SQLiteOpenHelper {
             String value = cursor.getString(cursor.getColumnIndex("value"));
             data = data + "\n" + name + ":" +value;
         }
-        System.out.println(data);
-        // 关闭游标，释放资源
         cursor.close();
+        System.out.println(data);
+        return data;
     }
 
 
