@@ -43,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
         final SQLiteDatabase db = dbInit.getWritableDatabase();
 
         //增加属性测试数据
-//        add_testdata(db);
+//        addTestData(db);
 
         //属性条初始化
-        initdata(dbInit,db);
+        initData(dbInit,db);
 
         text = (TextView) findViewById(R.id.text);
         button_nextyear = (Button) findViewById(R.id.button_nextyear);
@@ -59,26 +59,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void initdata(DBInit dbInit,SQLiteDatabase db){
+    public void initData(DBInit dbInit,SQLiteDatabase db){
 
-        Map<String,Integer> attribute_info = dbInit.attribute_info(db);
+        Map<String,Integer> attribute_info = dbInit.attribute_info(db,1);
 
         TextView attribute_name_1 = (TextView) findViewById(R.id.attribute_name_1);
         TextView attribute_name_2 = (TextView) findViewById(R.id.attribute_name_2);
         TextView attribute_name_3 = (TextView) findViewById(R.id.attribute_name_3);
+        TextView attribute_name_4 = (TextView) findViewById(R.id.attribute_name_4);
+        TextView attribute_name_5 = (TextView) findViewById(R.id.attribute_name_5);
         TextView attribute_value_1 = (TextView) findViewById(R.id.attribute_value_1);
         TextView attribute_value_2 = (TextView) findViewById(R.id.attribute_value_2);
         TextView attribute_value_3 = (TextView) findViewById(R.id.attribute_value_3);
+        TextView attribute_value_4 = (TextView) findViewById(R.id.attribute_value_4);
+        TextView attribute_value_5 = (TextView) findViewById(R.id.attribute_value_5);
 
         List attribute_name_list = new LinkedList();
         attribute_name_list.add(attribute_name_1);
         attribute_name_list.add(attribute_name_2);
         attribute_name_list.add(attribute_name_3);
+        attribute_name_list.add(attribute_name_4);
+        attribute_name_list.add(attribute_name_5);
 
         List attribute_value_list = new LinkedList();
         attribute_value_list.add(attribute_value_1);
         attribute_value_list.add(attribute_value_2);
         attribute_value_list.add(attribute_value_3);
+        attribute_value_list.add(attribute_value_4);
+        attribute_value_list.add(attribute_value_5);
 
         int count = 0;
         for(Map.Entry<String,Integer> entry: attribute_info.entrySet()){
@@ -94,25 +102,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void add_testdata(SQLiteDatabase db){
-        ContentValues values = new ContentValues();
+    public void addTestData(SQLiteDatabase db) {
+        Log.i("sql", "------add_testdata-----");
 
-        Map<String,Integer> map_attribute = new HashMap<String,Integer>();
-        map_attribute.put("健康",80);
-        map_attribute.put("魅力",60);
-        map_attribute.put("学识",10);
+        ContentValues rule_values = new ContentValues();
+        rule_values.put("id", 1);
+        rule_values.put("name","111" );
+        rule_values.put("age","1" );
+        rule_values.put("isdead","0" );
+        db.insert("rule", null, rule_values);
 
-        Log.i("sql", "add_testdata: ");
+        Log.i("sql", rule_values.toString());
 
-        for(Map.Entry<String,Integer> entry: map_attribute.entrySet()){
-            String mapKey = entry.getKey();
-            int mapValue = entry.getValue();
-            Log.i("sql", "insert into attribute:"+mapKey+" "+mapValue);
-            values.put("name",mapKey);
-            values.put("value",mapValue);
-            db.insert("attribute", null, values);
-        }
+        ContentValues attribute_values = new ContentValues();
+        attribute_values.put("id", 1);
+        attribute_values.put("name","111" );
+        attribute_values.put("health",(int) (Math.random()*100) );
+        attribute_values.put("charm",(int) (Math.random()*100));
+        attribute_values.put("knowledge",(int) (Math.random()*100));
+        attribute_values.put("talent",(int) (Math.random()*100));
+        attribute_values.put("luck",(int) (Math.random()*100));
+        db.insert("attribute", null, attribute_values);
 
+        Log.i("sql", attribute_values.toString());
 
     }
 
