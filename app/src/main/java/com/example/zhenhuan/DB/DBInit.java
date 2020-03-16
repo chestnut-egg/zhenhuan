@@ -1,5 +1,6 @@
 package com.example.zhenhuan.DB;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,12 +13,13 @@ import java.lang.reflect.Type;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class DBInit extends SQLiteOpenHelper {
     // 数据库默认名字
     public static final String db_name = "zhenhuan_db";
-    SQLiteDatabase db;
 
     public DBInit(Context context, int version) {
         super(context, db_name, null, version);
@@ -59,6 +61,48 @@ public class DBInit extends SQLiteOpenHelper {
         Log.i("sql", "--------");
         cursor.close();
         return attribute_info;
+    }
+
+    public List<Map<String,Integer>> queryAge(SQLiteDatabase db){
+        Cursor cursor = db.query("rule", new String[]{"id","age"}, null, null, null, null, null);
+
+        List<Map<String,Integer>> rules = new LinkedList();
+
+        while(cursor.moveToNext()){
+            Map<String,Integer> rule = new HashMap();
+            rule.put("id",Utils.StringToInt(cursor.getString(cursor.getColumnIndex("id"))) );
+            rule.put("age",Utils.StringToInt(cursor.getString(cursor.getColumnIndex("age"))) );
+            rules.add(rule);
+        }
+
+        System.out.println("------all rule's age------");
+        System.out.println(rules);
+        System.out.println("--------------------------");
+
+        return rules;
+    }
+
+    public void updateAge(SQLiteDatabase db){
+
+        List<Map<String,Integer>> rules = queryAge(db);
+
+        System.out.println("----- update age -------");
+
+        for (int i = 0; i < rules.size(); i++) {
+            Map<String,Integer> rule = rules.get(i);
+            for(Map.Entry<String, Integer> entry:rule.entrySet()){
+                String id = entry.getKey();
+                int age = entry.getValue();
+                ContentValues values = new ContentValues();
+                age++;
+                values.put("age", age);
+                db.update("rule", values, "id = ?", new String[]{id});
+            }
+        }
+
+
+
+
     }
 
 
