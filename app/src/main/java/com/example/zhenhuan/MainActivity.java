@@ -2,13 +2,24 @@ package com.example.zhenhuan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.amitshekhar.DebugDB;
+import com.example.zhenhuan.DB.DBInit;
+
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import com.example.zhenhuan.DB.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //显示数据库数据
+        DebugDB.getAddressLog();
+
+        DBInit dbInit = new DBInit(this,1);
+        SQLiteDatabase db = dbInit.getWritableDatabase();
+        add_testdata(db);
 
         text = (TextView) findViewById(R.id.text);
         button_nextyear = (Button) findViewById(R.id.button_nextyear);
@@ -49,6 +67,29 @@ public class MainActivity extends AppCompatActivity {
         attribute_value_list.add(attribute_value_1);
         attribute_value_list.add(attribute_value_2);
         attribute_value_list.add(attribute_value_3);
+
+    }
+
+
+    public void add_testdata(SQLiteDatabase db){
+        ContentValues values = new ContentValues();
+
+        Map<String,Integer> map_attribute = new HashMap<String,Integer>();
+        map_attribute.put("健康",80);
+        map_attribute.put("魅力",60);
+        map_attribute.put("学识",10);
+
+        Log.i("sql", "add_testdata: ");
+
+        for(Map.Entry<String,Integer> entry: map_attribute.entrySet()){
+            String mapKey = entry.getKey();
+            int mapValue = entry.getValue();
+            Log.i("sql", "insert into attribute:"+mapKey+" "+mapValue);
+            values.put("name",mapKey);
+            values.put("value",mapValue);
+            db.insert("attribute", null, values);
+        }
+
 
     }
 
