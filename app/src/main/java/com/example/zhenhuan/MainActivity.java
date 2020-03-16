@@ -31,12 +31,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //去除标题栏
+        if (getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
+
         //显示数据库数据
         DebugDB.getAddressLog();
 
         final DBInit dbInit = new DBInit(this,1);
         final SQLiteDatabase db = dbInit.getWritableDatabase();
-        add_testdata(db);
+
+        //增加属性测试数据
+//        add_testdata(db);
 
         //属性条初始化
         initdata(dbInit,db);

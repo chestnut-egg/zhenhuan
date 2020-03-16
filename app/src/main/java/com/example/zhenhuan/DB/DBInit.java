@@ -28,7 +28,6 @@ public class DBInit extends SQLiteOpenHelper {
         String attribute_table = "create table attribute(id integer primary key autoincrement,name vchar,value int)";
         db.execSQL(attribute_table);
 
-//        addtestdata(db);
     }
 
     @Override
