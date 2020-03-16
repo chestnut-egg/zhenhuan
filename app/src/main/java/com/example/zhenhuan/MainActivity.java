@@ -34,9 +34,12 @@ public class MainActivity extends AppCompatActivity {
         //显示数据库数据
         DebugDB.getAddressLog();
 
-        DBInit dbInit = new DBInit(this,1);
-        SQLiteDatabase db = dbInit.getWritableDatabase();
+        final DBInit dbInit = new DBInit(this,1);
+        final SQLiteDatabase db = dbInit.getWritableDatabase();
         add_testdata(db);
+
+        //属性条初始化
+        initdata(dbInit,db);
 
         text = (TextView) findViewById(R.id.text);
         button_nextyear = (Button) findViewById(R.id.button_nextyear);
@@ -49,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void initdata(){
+    public void initdata(DBInit dbInit,SQLiteDatabase db){
+
+        Map<String,Integer> attribute_info = dbInit.attribute_info(db);
 
         TextView attribute_name_1 = (TextView) findViewById(R.id.attribute_name_1);
         TextView attribute_name_2 = (TextView) findViewById(R.id.attribute_name_2);
@@ -67,6 +72,17 @@ public class MainActivity extends AppCompatActivity {
         attribute_value_list.add(attribute_value_1);
         attribute_value_list.add(attribute_value_2);
         attribute_value_list.add(attribute_value_3);
+
+        int count = 0;
+        for(Map.Entry<String,Integer> entry: attribute_info.entrySet()){
+            String mapKey = entry.getKey();
+            int mapValue = entry.getValue();
+            TextView attribute_name = (TextView) attribute_name_list.get(count);
+            TextView attribute_value = (TextView) attribute_value_list.get(count);
+            attribute_name.setText(mapKey);
+            attribute_value.setText(String.valueOf(mapValue));
+            count++;
+        }
 
     }
 

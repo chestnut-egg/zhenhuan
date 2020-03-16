@@ -1,9 +1,12 @@
 package com.example.zhenhuan.DB;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.example.zhenhuan.tool.Utils;
 
 import java.lang.reflect.Type;
 import java.text.MessageFormat;
@@ -33,24 +36,22 @@ public class DBInit extends SQLiteOpenHelper {
     }
 
 
-    public void addtestdata(SQLiteDatabase db){
-        Map<String,Integer> map_attribute = new HashMap<String,Integer>();
-        map_attribute.put("健康",80);
-        map_attribute.put("魅力",60);
-        map_attribute.put("学识",10);
-
-        for(Map.Entry<String,Integer> entry: map_attribute.entrySet()){
-            String mapKey = entry.getKey();
-            int mapValue = entry.getValue();
-            Log.i("sql", "insert into attribute");
-            Object objects[] = new Object[2];
-            objects[0] = mapKey;
-            objects[1] = mapValue;
-            db.execSQL("insert into attribute(name,value) values('?','?')", objects);
+    public Map attribute_info(SQLiteDatabase db)
+    {
+        Cursor cursor = db.query("attribute", new String[]{"name","value"}, null, null, null, null, null);
+        String data = "";
+        Map<String,Integer> attribute_info = new HashMap<String,Integer>();
+        Log.i("sql", "---query attribute_info---");
+        while(cursor.moveToNext()){
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            int value = Utils.StringToInt(cursor.getString(cursor.getColumnIndex("value")));
+            attribute_info.put(name,value);
         }
+        Log.i("sql", attribute_info.toString());
+        Log.i("sql", "--------");
+        cursor.close();
+        return attribute_info;
     }
-
-
 
 
 }
