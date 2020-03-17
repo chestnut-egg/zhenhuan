@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         final SQLiteDatabase db = dbInit.getWritableDatabase();
 
         //增加属性测试数据
-//        addTestData(db);
+        addTestData(db);
 
         //属性条初始化
         initData(dbInit,db);
@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
         ContentValues rule_values = new ContentValues();
         rule_values.put("id", 1);
         rule_values.put("name","111" );
+        rule_values.put("sex", 1);
         rule_values.put("age","1" );
         rule_values.put("isdead","0" );
         db.insert("rule", null, rule_values);

@@ -28,7 +28,7 @@ public class DBInit extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.i("sql", "createTable: ");
-        String rule_table = "create table rule(id integer primary key autoincrement,name vchar,age int,isdead int)";
+        String rule_table = "create table rule(id integer primary key autoincrement,name vchar,sex int,age int,isdead int)";
         db.execSQL(rule_table);
         String attribute_table = "create table attribute(id integer primary key,name vchar,health int,charm int,knowledge int,talent int,luck int)";
         db.execSQL(attribute_table);
