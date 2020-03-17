@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 text.append("next\n");
                 dbInit.updateAge(db);
-                addRule(db,0,10,30);
+//                addRule(db,0,10,30);
             }
         });
     }
