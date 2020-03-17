@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import com.example.zhenhuan.DB.*;
 import com.example.zhenhuan.tool.Utils;
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 text.append("next\n");
                 dbInit.updateAge(db);
+
+                text.append(getName());
             }
         });
     }
@@ -152,5 +155,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    public String getName(){
+        String[] familyNames = getResources().getString(R.string.familyName).split("、");
+        String[] firstNames = getResources().getString(R.string.firstName).split("、");
+
+        int max= familyNames.length;
+        int min = 0;
+        int num = new Random().nextInt(max-min+1)+min;
+        String familyName = familyNames[num];
+
+        max= firstNames.length;
+        num = new Random().nextInt(max-min+1)+min;
+
+        String name = String.valueOf(familyName) +  firstNames[num];
+
+        return name;
+    }
 
 }
