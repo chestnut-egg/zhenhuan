@@ -90,18 +90,15 @@ public class DBInit extends SQLiteOpenHelper {
 
         for (int i = 0; i < rules.size(); i++) {
             Map<String,Integer> rule = rules.get(i);
-            for(Map.Entry<String, Integer> entry:rule.entrySet()){
-                String id = entry.getKey();
-                int age = entry.getValue();
-                ContentValues values = new ContentValues();
-                age++;
-                values.put("age", age);
-                db.update("rule", values, "id = ?", new String[]{id});
-            }
+            String id = rule.get("id").toString();
+            int age = rule.get("age");
+            ContentValues values = new ContentValues();
+            age++;
+            values.put("age", age);
+            db.update("rule", values, "id = ?", new String[]{id});
         }
 
-
-
+        queryAge(db)
 
     }
 
