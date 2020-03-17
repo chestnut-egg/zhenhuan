@@ -167,8 +167,13 @@ public class MainActivity extends AppCompatActivity {
 
         max= firstNames.length;
         num = new Random().nextInt(max-min+1)+min;
+        String firstName = firstNames[num];
 
-        String name = String.valueOf(familyName) +  firstNames[num];
+        String name = familyName + firstName;
+
+        System.out.println("-----getName------");
+        System.out.println(name);
+        System.out.println("------------------");
 
         return name;
     }
