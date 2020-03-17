@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.amitshekhar.DebugDB;
 import com.example.zhenhuan.DB.DBInit;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         final SQLiteDatabase db = dbInit.getWritableDatabase();
 
         //增加属性测试数据
-        addTestData(db);
+//        addTestData(db);
 
         //属性条初始化
         initData(dbInit,db);
@@ -62,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 text.append("next\n");
                 dbInit.updateAge(db);
-
-                text.append(getName());
+//                addRule(db,0,10,30);
             }
         });
     }
@@ -177,6 +177,37 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("------------------");
 
         return name;
+    }
+
+    public void addRule(SQLiteDatabase db,int sex,int minnumber,int maxnumber){
+        Log.i("sql", "------add rule-----");
+
+        String id =String.valueOf(new Date().getTime());
+        String name = getName();
+
+        ContentValues rule_values = new ContentValues();
+        rule_values.put("id",id);
+        rule_values.put("name",name);
+        rule_values.put("sex", sex);
+        rule_values.put("age",new Random().nextInt(maxnumber-minnumber+1)+minnumber );
+        rule_values.put("isdead","0" );
+        db.insert("rule", null, rule_values);
+
+        Log.i("sql", rule_values.toString());
+
+        ContentValues attribute_values = new ContentValues();
+        attribute_values.put("id", id);
+        attribute_values.put("name",name );
+        attribute_values.put("health",(int) (Math.random()*100) );
+        attribute_values.put("charm",(int) (Math.random()*100));
+        attribute_values.put("knowledge",(int) (Math.random()*100));
+        attribute_values.put("talent",(int) (Math.random()*100));
+        attribute_values.put("luck",(int) (Math.random()*100));
+        db.insert("attribute", null, attribute_values);
+
+        Log.i("sql", attribute_values.toString());
+
+        Log.i("sql", "------add rule end-----");
     }
 
 }
