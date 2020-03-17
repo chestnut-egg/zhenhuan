@@ -12,14 +12,5 @@ public class Utils {
         return num;
     }
 
-    public static long StringToLong(String s){
-        long num = -1;
-        try {
-            num = Integer.parseInt(s);
-        }catch (NumberFormatException e){
-            e.printStackTrace();
-        }
-        return num;
-    }
 
 }
