@@ -98,7 +98,7 @@ public class DBInit extends SQLiteOpenHelper {
             db.update("rule", values, "id = ?", new String[]{id});
         }
 
-        queryAge(db)
+        queryAge(db);
 
     }
 
