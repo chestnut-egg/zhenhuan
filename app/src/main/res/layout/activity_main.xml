@@ -85,6 +85,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="30dp">
+                        <ProgressBar
+                            android:id="@+id/progress_bar_1"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="180dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="center"
+                            android:max="100"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/progressbar_health"
+                            />
                         <TextView
                             android:id="@+id/attribute_value_1"
                             android:layout_width="match_parent"
@@ -103,6 +113,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="30dp">
+                        <ProgressBar
+                            android:id="@+id/progress_bar_2"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="180dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="center"
+                            android:max="100"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/progressbar_health"
+                            />
                         <TextView
                             android:id="@+id/attribute_value_2"
                             android:layout_width="match_parent"
@@ -121,6 +141,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="30dp">
+                        <ProgressBar
+                            android:id="@+id/progress_bar_3"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="180dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="center"
+                            android:max="100"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/progressbar_health"
+                            />
                         <TextView
                             android:id="@+id/attribute_value_3"
                             android:layout_width="match_parent"
@@ -139,6 +169,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="30dp">
+                        <ProgressBar
+                            android:id="@+id/progress_bar_4"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="180dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="center"
+                            android:max="100"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/progressbar_health"
+                            />
                         <TextView
                             android:id="@+id/attribute_value_4"
                             android:layout_width="match_parent"
@@ -157,6 +197,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="30dp">
+                        <ProgressBar
+                            android:id="@+id/progress_bar_5"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="180dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="center"
+                            android:max="100"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/progressbar_health"
+                            />
                         <TextView
                             android:id="@+id/attribute_value_5"
                             android:layout_width="match_parent"

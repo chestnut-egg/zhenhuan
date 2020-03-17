@@ -6,10 +6,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.amitshekhar.DebugDB;
@@ -76,20 +80,32 @@ public class MainActivity extends AppCompatActivity {
         TextView attribute_value_3 = (TextView) findViewById(R.id.attribute_value_3);
         TextView attribute_value_4 = (TextView) findViewById(R.id.attribute_value_4);
         TextView attribute_value_5 = (TextView) findViewById(R.id.attribute_value_5);
+        ProgressBar progress_bar_1 = findViewById(R.id.progress_bar_1);
+        ProgressBar progress_bar_2 = findViewById(R.id.progress_bar_2);
+        ProgressBar progress_bar_3 = findViewById(R.id.progress_bar_3);
+        ProgressBar progress_bar_4 = findViewById(R.id.progress_bar_4);
+        ProgressBar progress_bar_5 = findViewById(R.id.progress_bar_5);
 
-        List attribute_name_list = new LinkedList();
+        List<TextView> attribute_name_list = new LinkedList();
         attribute_name_list.add(attribute_name_1);
         attribute_name_list.add(attribute_name_2);
         attribute_name_list.add(attribute_name_3);
         attribute_name_list.add(attribute_name_4);
         attribute_name_list.add(attribute_name_5);
 
-        List attribute_value_list = new LinkedList();
+        List<TextView> attribute_value_list = new LinkedList();
         attribute_value_list.add(attribute_value_1);
         attribute_value_list.add(attribute_value_2);
         attribute_value_list.add(attribute_value_3);
         attribute_value_list.add(attribute_value_4);
         attribute_value_list.add(attribute_value_5);
+
+        List<ProgressBar> progressbar_list = new LinkedList();
+        progressbar_list.add(progress_bar_1);
+        progressbar_list.add(progress_bar_2);
+        progressbar_list.add(progress_bar_3);
+        progressbar_list.add(progress_bar_4);
+        progressbar_list.add(progress_bar_5);
 
         int count = 0;
         for(Map.Entry<String,Integer> entry: attribute_info.entrySet()){
@@ -101,6 +117,11 @@ public class MainActivity extends AppCompatActivity {
             attribute_value.setText(String.valueOf(mapValue));
             count++;
         }
+
+        for (int i=0;i<progressbar_list.size();i++){
+            progressbar_list.get(i).setProgress(Utils.StringToInt(attribute_value_list.get(i).getText().toString()));
+        }
+
 
     }
 
