@@ -47,7 +47,7 @@
 
         <!--            android:background="@drawable/btn_bg1"-->
         <Button
-            android:id="@+id/button_nextyear"
+            android:id="@+id/buttonNextYear"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_below="@id/text"
@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:orientation="horizontal"
-            android:layout_below="@+id/button_nextyear"
+            android:layout_below="@+id/buttonNextYear"
             >
             <LinearLayout
                 android:layout_width="0dp"
@@ -230,6 +230,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
+                        <Button
+                            android:id="@+id/buttonStarLife"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="新的人生">
+                        </Button>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
