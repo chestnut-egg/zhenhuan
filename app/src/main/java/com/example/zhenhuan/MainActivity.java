@@ -43,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
         final DBInit dbInit = new DBInit(this,1);
         final SQLiteDatabase db = dbInit.getWritableDatabase();
 
-        //增加属性测试数据
-//        addTestData(db);
-
         //属性条初始化
         initData(dbInit,db);
 
@@ -72,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 
     public void initData(DBInit dbInit,SQLiteDatabase db){
 
@@ -133,32 +129,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    public void addTestData(SQLiteDatabase db) {
-        Log.i("sql", "------add_testdata-----");
-
-        ContentValues rule_values = new ContentValues();
-        rule_values.put("name","111" );
-        rule_values.put("sex", 1);
-        rule_values.put("age","1" );
-        rule_values.put("isdead","0" );
-        db.insert("rule", null, rule_values);
-
-        Log.i("sql", rule_values.toString());
-
-        ContentValues attribute_values = new ContentValues();
-        attribute_values.put("name","111" );
-        attribute_values.put("health",(int) (Math.random()*100) );
-        attribute_values.put("charm",(int) (Math.random()*100));
-        attribute_values.put("knowledge",10);
-        attribute_values.put("talent",(int) (Math.random()*100));
-        attribute_values.put("luck",(int) (Math.random()*100));
-        db.insert("attribute", null, attribute_values);
-
-        Log.i("sql", attribute_values.toString());
-
-    }
-
     public void startLife(SQLiteDatabase db) {
         Log.i("sql", "------start Life-----");
 
@@ -210,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 
     public String getName(){
         String[] familyNames = getResources().getString(R.string.familyName).split("、");
