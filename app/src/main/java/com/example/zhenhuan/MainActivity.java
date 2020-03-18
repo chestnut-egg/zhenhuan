@@ -132,29 +132,28 @@ public class MainActivity extends AppCompatActivity {
         Log.i("sql", "------start Life-----");
 
         Log.i("delete", "truncate table rule & attribute");
-        db.execSQL("DELETE FROM sqlite_sequence WHERE name = 'rule';");
-        db.execSQL("DELETE FROM sqlite_sequence WHERE name = 'attribute';");
 
-        String name = getName();
+        db.execSQL("DELETE FROM 'rule';");
+        db.execSQL("update sqlite_sequence set seq=0 where name='rule';");
+        db.execSQL("DELETE FROM 'attribute';");
+        db.execSQL("update sqlite_sequence set seq=0 where name='attribute';");
 
         int maxnumber = 0;
         int minnumber = 0;
         int age = 0;
 
         Log.i("add", "--------add mysqlf--------");
-        addRule(db,name,0,0,-1);
+        addRule(db,getName(),0,0,-1);
 
         Log.i("add", "--------add mother--------");
         maxnumber = 30;
         minnumber = 16;
         int matherAge = new Random().nextInt(maxnumber-minnumber+1)+minnumber;
-        addRule(db,name,0,matherAge,0);
+        addRule(db,getName(),0,matherAge,0);
 
         Log.i("add", "--------add father--------");
-        maxnumber = 30;
-        minnumber = 16;
         int fatherAge = new Random().nextInt(maxnumber-minnumber+1)+minnumber;
-        addRule(db,name,1,fatherAge,1);
+        addRule(db,getName(),1,fatherAge,1);
 
         //哥哥姐姐数量
         int num = new Random().nextInt(5);
@@ -162,9 +161,9 @@ public class MainActivity extends AppCompatActivity {
         int maxAge = fatherAge;
         if (matherAge < fatherAge)
             maxAge = matherAge;
-
+        //父母最低年龄大于18岁
         if (maxAge > 18){
-            //最早16岁生下
+            //最早16岁生下哥哥姐姐
             maxAge -= 16;
             for (int i=0;i<num;i++){
                 age = new Random().nextInt(maxAge-1+1)+1;
