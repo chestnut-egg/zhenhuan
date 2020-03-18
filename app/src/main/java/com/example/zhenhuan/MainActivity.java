@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.example.zhenhuan.DB.Rule;
 import com.example.zhenhuan.tool.Utils;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,9 +54,10 @@ public class MainActivity extends AppCompatActivity {
         buttonNextYear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int age = dbInit.queryAgeByID(db,1);
-                text.append("年龄:"+age+"岁");
                 dbInit.updateAge(db);
+                Rule mysqlf = dbInit.queryRuleById(db,1);
+                int age = mysqlf.getAge();
+                text.append("年龄:"+age+"岁\n");
 //                addRule(db,0,10,30);
             }
         });
@@ -189,7 +191,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         text = (TextView) findViewById(R.id.text);
-        text.append("年龄:0岁");
+        text.setText("");
+        text.append("年龄:0岁\n");
 
     }
 

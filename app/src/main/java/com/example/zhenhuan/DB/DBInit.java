@@ -9,8 +9,6 @@ import android.util.Log;
 
 import com.example.zhenhuan.tool.Utils;
 
-import java.lang.reflect.Type;
-import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -63,16 +61,19 @@ public class DBInit extends SQLiteOpenHelper {
         return attribute_info;
     }
 
-    public List<Map<String,Integer>> queryAge(SQLiteDatabase db){
-        Cursor cursor = db.query("rule", new String[]{"id","age","isdead"}, null, null, null, null, null);
+    public List<Rule> queryRules(SQLiteDatabase db){
+        Cursor cursor = db.query("rule", new String[]{"id","name","sex","age","family","isdead"}, null, null, null, null, null);
 
-        List<Map<String,Integer>> rules = new LinkedList();
+        List<Rule> rules = new LinkedList();
 
         while(cursor.moveToNext()){
-            Map<String,Integer> rule = new HashMap();
-            rule.put("id",Utils.StringToInt(cursor.getString(cursor.getColumnIndex("id"))) );
-            rule.put("age",Utils.StringToInt(cursor.getString(cursor.getColumnIndex("age"))) );
-            rule.put("isdead",Utils.StringToInt(cursor.getString(cursor.getColumnIndex("isdead"))) );
+            Rule rule = new Rule();
+            rule.setId(Utils.StringToInt(cursor.getString(cursor.getColumnIndex("id"))));
+            rule.setName(cursor.getString(cursor.getColumnIndex("name")));
+            rule.setSex(Utils.StringToInt(cursor.getString(cursor.getColumnIndex("sex"))));
+            rule.setAge(Utils.StringToInt(cursor.getString(cursor.getColumnIndex("age"))));
+            rule.setFamily(Utils.StringToInt(cursor.getString(cursor.getColumnIndex("family"))));
+            rule.setIsDead(Utils.StringToInt(cursor.getString(cursor.getColumnIndex("isdead"))));
             rules.add(rule);
         }
 
@@ -83,33 +84,38 @@ public class DBInit extends SQLiteOpenHelper {
         return rules;
     }
 
-    public int queryAgeByID(SQLiteDatabase db,int id){
-        Cursor cursor = db.query("rule", new String[]{"id","age"}, "id = ?", new String[]{""+id}, null, null, null);
-        int age = 0;
+    public Rule queryRuleById(SQLiteDatabase db, int id){
+        Cursor cursor = db.query("rule", new String[]{"id","name","sex","age","family","isdead"}, "id = ?", new String[]{""+id}, null, null, null);
+        Rule rule = new Rule();
         while(cursor.moveToNext()){
-            age = Utils.StringToInt(cursor.getString(cursor.getColumnIndex("age")));
+            rule.setId(Utils.StringToInt(cursor.getString(cursor.getColumnIndex("id"))));
+            rule.setName(cursor.getString(cursor.getColumnIndex("name")));
+            rule.setSex(Utils.StringToInt(cursor.getString(cursor.getColumnIndex("sex"))));
+            rule.setAge(Utils.StringToInt(cursor.getString(cursor.getColumnIndex("age"))));
+            rule.setFamily(Utils.StringToInt(cursor.getString(cursor.getColumnIndex("family"))));
+            rule.setIsDead(Utils.StringToInt(cursor.getString(cursor.getColumnIndex("isdead"))));
         }
 
         System.out.println("------ queryAge by id = ------"+id);
-        System.out.println("age:"+age);
+        System.out.println("age:"+rule.getAge());
         System.out.println("--------------------------");
 
-        return age;
+        return rule;
     }
 
     public void updateAge(SQLiteDatabase db){
 
-        List<Map<String,Integer>> rules = queryAge(db);
+        List<Rule> rules = queryRules(db);
 
         System.out.println("----- update age -------");
 
         for (int i = 0; i < rules.size(); i++) {
-            Map<String,Integer> rule = rules.get(i);
-            String id = rule.get("id").toString();
-            String isDead = rule.get("isdead").toString();
+            Rule rule = rules.get(i);
+            String id = ""+rule.getId();
+            String isDead = ""+rule.getIsDead();
 
             if (Utils.StringToInt(isDead) == 0){
-                int age = rule.get("age");
+                int age = rule.getAge();
                 ContentValues values = new ContentValues();
                 age++;
                 values.put("age", age);
@@ -118,7 +124,7 @@ public class DBInit extends SQLiteOpenHelper {
 
         }
 
-        queryAge(db);
+        queryRules(db);
 
     }
 
