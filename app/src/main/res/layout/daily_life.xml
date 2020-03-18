@@ -17,14 +17,12 @@
         <ImageView
             android:id="@+id/daily_image"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_vertical|right" />
+            android:layout_height="100dp"/>
 
         <TextView
             android:id="@+id/daily_name"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_weight="1"
             android:gravity="center"
             android:textSize="21sp" />
 
