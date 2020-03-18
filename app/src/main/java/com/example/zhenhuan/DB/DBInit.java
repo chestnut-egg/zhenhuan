@@ -82,6 +82,20 @@ public class DBInit extends SQLiteOpenHelper {
         return rules;
     }
 
+    public int queryAgeByID(SQLiteDatabase db,int id){
+        Cursor cursor = db.query("rule", new String[]{"id","age"}, "id = ?", new String[]{""+id}, null, null, null);
+        int age = 0;
+        while(cursor.moveToNext()){
+            age = Utils.StringToInt(cursor.getString(cursor.getColumnIndex("age")));
+        }
+
+        System.out.println("------ queryAge by id = ------"+id);
+        System.out.println("age:"+age);
+        System.out.println("--------------------------");
+
+        return age;
+    }
+
     public void updateAge(SQLiteDatabase db){
 
         List<Map<String,Integer>> rules = queryAge(db);

@@ -51,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
         buttonNextYear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                text.append("next\n");
+                int age = dbInit.queryAgeByID(db,1);
+                text.append("年龄:"+age+"岁");
                 dbInit.updateAge(db);
 //                addRule(db,0,10,30);
             }
         });
-
 
         buttonStarLife = (Button) findViewById(R.id.buttonStarLife);
         buttonStarLife.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
                 initData(dbInit,db);
             }
         });
-
 
     }
 
@@ -179,6 +178,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
+        text = (TextView) findViewById(R.id.text);
+        text.append("年龄:0岁");
+
     }
 
     public String getName(){
