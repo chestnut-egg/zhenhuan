@@ -64,7 +64,7 @@ public class DBInit extends SQLiteOpenHelper {
     }
 
     public List<Map<String,Integer>> queryAge(SQLiteDatabase db){
-        Cursor cursor = db.query("rule", new String[]{"id","age"}, null, null, null, null, null);
+        Cursor cursor = db.query("rule", new String[]{"id","age","isdead"}, null, null, null, null, null);
 
         List<Map<String,Integer>> rules = new LinkedList();
 
@@ -72,6 +72,7 @@ public class DBInit extends SQLiteOpenHelper {
             Map<String,Integer> rule = new HashMap();
             rule.put("id",Utils.StringToInt(cursor.getString(cursor.getColumnIndex("id"))) );
             rule.put("age",Utils.StringToInt(cursor.getString(cursor.getColumnIndex("age"))) );
+            rule.put("isdead",Utils.StringToInt(cursor.getString(cursor.getColumnIndex("isdead"))) );
             rules.add(rule);
         }
 
