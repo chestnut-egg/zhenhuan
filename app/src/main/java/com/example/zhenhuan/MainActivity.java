@@ -3,6 +3,7 @@ package com.example.zhenhuan;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button buttonNextYear;
     private Button buttonStarLife;
+    private Button buttonMainToDaily;
     private TextView text;
 
     @Override
@@ -58,12 +60,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonStarLife = (Button) findViewById(R.id.buttonStarLife);
+        buttonStarLife = (Button) findViewById(R.id.button_star_life);
         buttonStarLife.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startLife(db);
                 initData(dbInit,db);
+            }
+        });
+
+        buttonMainToDaily = findViewById(R.id.button_main_to_daily);
+        buttonMainToDaily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this, DailyLifeActivity.class); startActivity(intent);
             }
         });
 

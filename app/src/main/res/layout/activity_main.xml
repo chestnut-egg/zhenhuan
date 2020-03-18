@@ -231,7 +231,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1">
                         <Button
-                            android:id="@+id/buttonStarLife"
+                            android:id="@+id/button_star_life"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="新的人生">
@@ -241,6 +241,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
+                        <Button
+                            android:id="@+id/button_main_to_daily"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="活动">
+                        </Button>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
