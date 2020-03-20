@@ -35,10 +35,33 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         DailyLife dailyLife = dailyLives.get(position);
         holder.name.setText(dailyLife.getName());
         Glide.with(context).load(dailyLife.getImgId()).into(holder.image);
+
+
+        if (mOnItemClickListener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    mOnItemClickListener.onItemClick(holder.itemView, pos);
+                }
+            });
+
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    mOnItemClickListener.onItemLongClick(holder.itemView, pos);
+                    return false;
+                }
+            });
+        }
+
+
+
     }
 
     @Override
@@ -59,4 +82,22 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder> 
             name = (TextView) itemView.findViewById(R.id.daily_name);
         }
     }
+
+
+    //点击
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
+    }
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
+
+
+
 }

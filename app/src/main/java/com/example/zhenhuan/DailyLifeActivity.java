@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +39,7 @@ public class DailyLifeActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        initCats();
+        initData();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         int spanCount = 1;
@@ -47,9 +49,24 @@ public class DailyLifeActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
+        adapter.setOnItemClickListener(new DailyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getApplicationContext(),
+                        "click: " + position, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Toast.makeText(getApplicationContext(),
+                        "long click: " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
-    private void initCats() {
+    private void initData() {
         dailyLiveList.clear();
         for (int i = 0; i < 20; i++) {//随机添加 100 只猫的信息
             Random random = new Random();
