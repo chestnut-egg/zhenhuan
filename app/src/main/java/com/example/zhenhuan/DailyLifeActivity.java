@@ -19,13 +19,12 @@ public class DailyLifeActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
 
-    private DailyLife[] dailyLives = {new DailyLife(R.drawable.progressbar,"123"),
-            new DailyLife(R.drawable.progressbar,"666"),
-            new DailyLife(R.drawable.progressbar,"555"),
-            new DailyLife(R.drawable.progressbar,"111"),
-            new DailyLife(R.drawable.progressbar,"222"),
-            new DailyLife(R.drawable.progressbar,"333"),
-            new DailyLife(R.drawable.progressbar,"444")};
+    private DailyLife[] dailyLives = {
+            new DailyLife(R.drawable.progressbar,"医馆"),
+            new DailyLife(R.drawable.progressbar,"客栈"),
+            new DailyLife(R.drawable.progressbar,"甜水巷"),
+            new DailyLife(R.drawable.progressbar,"寺庙"),
+            new DailyLife(R.drawable.progressbar,"武馆")};
     private List<DailyLife> dailyLiveList = new ArrayList<>();
 
 
@@ -51,7 +50,8 @@ public class DailyLifeActivity extends AppCompatActivity {
 
         adapter.setOnItemClickListener(new DailyAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, int position,String name) {
+                System.out.println("点击了第"+position+"个card name = "+name);
                 Toast.makeText(getApplicationContext(),
                         "click: " + position, Toast.LENGTH_SHORT).show();
             }

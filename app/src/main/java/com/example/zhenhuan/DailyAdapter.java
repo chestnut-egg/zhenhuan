@@ -46,7 +46,8 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mOnItemClickListener.onItemClick(holder.itemView, pos);
+                    String name = holder.name.getText().toString();
+                    mOnItemClickListener.onItemClick(holder.itemView, pos,name);
                 }
             });
 
@@ -54,6 +55,7 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder> 
                 @Override
                 public boolean onLongClick(View v) {
                     int pos = holder.getLayoutPosition();
+                    String name = holder.name.getText().toString();
                     mOnItemClickListener.onItemLongClick(holder.itemView, pos);
                     return false;
                 }
@@ -86,7 +88,7 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder> 
 
     //点击
     public interface OnItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, int position,String name);
 
         void onItemLongClick(View view, int position);
     }
