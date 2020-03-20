@@ -155,24 +155,27 @@ public class MainActivity extends AppCompatActivity {
         int age = 0;
 
         Log.i("add", "--------add mysqlf--------");
-        addRule(db,getName(),0,0,-1);
+        String myName = getName();
+        addRule(db,myName,0,0,-1);
 
         Log.i("add", "--------add mother--------");
         maxnumber = 30;
         minnumber = 16;
-        int matherAge = new Random().nextInt(maxnumber-minnumber+1)+minnumber;
-        addRule(db,getName(),0,matherAge,0);
+        int motherAge = new Random().nextInt(maxnumber-minnumber+1)+minnumber;
+        String motherName = getName();
+        addRule(db,motherName,0,motherAge,0);
 
         Log.i("add", "--------add father--------");
         int fatherAge = new Random().nextInt(maxnumber-minnumber+1)+minnumber;
+        String fatherName = getName();
         addRule(db,getName(),1,fatherAge,1);
 
         //哥哥姐姐数量
         int num = new Random().nextInt(5);
         //哥哥姐姐最大年龄
         int maxAge = fatherAge;
-        if (matherAge < fatherAge)
-            maxAge = matherAge;
+        if (motherAge < fatherAge)
+            maxAge = motherAge;
         //父母最低年龄大于18岁
         if (maxAge > 18){
             //最早16岁生下哥哥姐姐
@@ -193,6 +196,9 @@ public class MainActivity extends AppCompatActivity {
         text = (TextView) findViewById(R.id.text);
         text.setText("");
         text.append("年龄:0岁\n");
+        text.append("龚华年，我生于苏省海府，随父姓"+myName.substring(0,1)+",名"+myName.substring(1));
+        text.append("父亲"+fatherName+",年"+fatherAge);
+        text.append("母亲"+motherName+",年"+motherAge);
 
     }
 
