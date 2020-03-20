@@ -167,8 +167,15 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("add", "--------add father--------");
         int fatherAge = new Random().nextInt(maxnumber-minnumber+1)+minnumber;
-        String fatherName = getName();
-        addRule(db,getName(),1,fatherAge,1);
+        String fatherName = myName.substring(0,1)+getName().substring(1);
+        addRule(db,fatherName,1,fatherAge,1);
+
+        text = (TextView) findViewById(R.id.text);
+        text.setText("");
+        text.append("年龄:0岁\n");
+        text.append("龚华年，我生于苏省海府，随父姓"+myName.substring(0,1)+",名"+myName.substring(1)+"\n");
+        text.append("父亲"+fatherName+",年"+fatherAge+"\n");
+        text.append("母亲"+motherName+",年"+motherAge+"\n");
 
         //哥哥姐姐数量
         int num = new Random().nextInt(5);
@@ -185,20 +192,19 @@ public class MainActivity extends AppCompatActivity {
                 int sex = new Random().nextInt(2);
                 if (sex == 0){
                     Log.i("add", "--------add sister--------");
-                    addRule(db,getName(),0,age,2);
+                    String name = myName.substring(0,1)+getName().substring(1);
+                    text.append("有家姐"+name+",年"+age+"\n");
+                    addRule(db,name,0,age,2);
                 }else{
                     Log.i("add", "--------add brother--------");
-                    addRule(db,getName(),1,age,3);
+                    String name = myName.substring(0,1)+getName().substring(1);
+                    text.append("有兄长"+name+",年"+age+"\n");
+                    addRule(db,name,1,age,3);
                 }
             }
         }
 
-        text = (TextView) findViewById(R.id.text);
-        text.setText("");
-        text.append("年龄:0岁\n");
-        text.append("龚华年，我生于苏省海府，随父姓"+myName.substring(0,1)+",名"+myName.substring(1));
-        text.append("父亲"+fatherName+",年"+fatherAge);
-        text.append("母亲"+motherName+",年"+motherAge);
+
 
     }
 
@@ -216,10 +222,6 @@ public class MainActivity extends AppCompatActivity {
         String firstName = firstNames[num];
 
         String name = familyName + firstName;
-
-        System.out.println("-----getName------");
-        System.out.println(name);
-        System.out.println("------------------");
 
         return name;
     }
